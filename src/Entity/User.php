@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,6 +32,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $pseudo = null;
+
+    /**
+     * @var Collection<int, Partie>
+     */
+    #[ORM\OneToMany(targetEntity: Partie::class, mappedBy: 'user')]
+    private Collection $parties;
+
+    public function __construct()
+    {
+        $this->parties = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,5 +118,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): static
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Partie>
+     */
+    public function getParties(): Collection
+    {
+        return $this->parties;
+    }
+
+    public function addParty(Partie $party): static
+    {
+        if (!$this->parties->contains($party)) {
+            $this->parties->add($party);
+            $party->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParty(Partie $party): static
+    {
+        if ($this->parties->removeElement($party)) {
+            // set the owning side to null (unless already changed)
+            if ($party->getUser() === $this) {
+                $party->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
