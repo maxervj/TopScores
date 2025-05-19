@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Entity\Jeu;
+use App\Entity\Score;
+use App\Controller\SecurityController;
 
 #[Route('/partie')]
 #[IsGranted('ROLE_USER')]// This restreindre l'accès à la page partie uniquement aux utilisateurs connectés

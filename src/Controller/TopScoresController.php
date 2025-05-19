@@ -8,11 +8,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Form\ListeJeuxForm;
 use App\Entity\Jeu;
+use App\Entity\Score;
+use App\Form\ScoreForm;
 use Doctrine\ORM\EntityManager;
 
 final class TopScoresController extends AbstractController
 {
-    #[Route('topscores/{id}', name: 'app_top_scores')]
+    #[Route('/topscores/{id}', name: 'app_top_scores')]
     public function index(Request $request, $id, EntityManager $entity_Manager): Response
     {
         $Jeu = $entity_Manager->getRepository(Jeu::class)->find($id);
