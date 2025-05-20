@@ -17,11 +17,12 @@ class ListeJeuxForm extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'Choisir un jeu ',
                 'required' => true,
+                'label' =>  false,
             ])
             ->add('submit', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, [
                 'label' => 'Valider',
                 'attr' => [
-                    'class' => 'btn btn-primary',
+                    'class' => 'btn btn-warning',
                 ],
             ])
         ;

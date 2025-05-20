@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Joueur</th>
                 <th>Date</th>
                 <th>Score</th>
                 <th>actions</th>
@@ -18,8 +19,10 @@
         {% for partie in parties %}
             <tr>
                 <td>{{ partie.id }}</td>
+                <td>{{ partie.user }}</td>
                 <td>{{ partie.date ? partie.date|date('Y-m-d') : '' }}</td>
                 <td>{{ partie.score }}</td>
+                
                 <td>
                     <a href="{{ path('app_partie_show', {'id': partie.id}) }}">show</a>
                     <a href="{{ path('app_partie_edit', {'id': partie.id}) }}">edit</a>

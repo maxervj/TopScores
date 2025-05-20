@@ -5,4 +5,21 @@
 {% block body %}
 <h1>Liste des jeux</h1>
 {{form(formListJeu)}}
+
+<div  class="row">
+<h2>ScoresBoard</h2>
+<table class="table table-striped">
+<thead>
+<tr>
+    <th>Ranking</th>
+    <th>Joeurs</th>
+    <th>Score</th>
+</thead>
+<tbody>
+{% for score in topscores %}
+<tr>
+    <td>{{ loop.index }}</td>
+    <td>{{ score.user.pseudo }}</td>
+    <td>{{ score.score }}</td>
+    {% endfor %}
 {% endblock %}

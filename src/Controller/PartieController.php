@@ -16,7 +16,7 @@ use App\Entity\Score;
 use App\Controller\SecurityController;
 
 #[Route('/partie')]
-#[IsGranted('ROLE_USER')]// This restreindre l'accès à la page partie uniquement aux utilisateurs connectés
+// This restreindre l'accès à la page partie uniquement aux utilisateurs connectés
 final class PartieController extends AbstractController
 {
     #[Route(name: 'app_partie_index', methods: ['GET'])]

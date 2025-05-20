@@ -21,7 +21,7 @@ class Jeu
     /**
      * @var Collection<int, Partie>
      */
-    #[ORM\OneToMany(targetEntity: Partie::class, mappedBy: 'Partie')]
+    #[ORM\OneToMany(targetEntity: Partie::class, mappedBy: 'jeu')]
     private Collection $parties;
 
     public function __construct()
@@ -58,7 +58,7 @@ class Jeu
     {
         if (!$this->parties->contains($party)) {
             $this->parties->add($party);
-            $party->setPartie($this);
+            $party->setJeu($this);
         }
 
         return $this;
@@ -68,8 +68,8 @@ class Jeu
     {
         if ($this->parties->removeElement($party)) {
             // set the owning side to null (unless already changed)
-            if ($party->getPartie() === $this) {
-                $party->setPartie(null);
+            if ($party->getJeu() === $this) {
+                $party->setJeu(null);
             }
         }
 

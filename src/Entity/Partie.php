@@ -24,7 +24,10 @@ class Partie
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'parties')]
-    private ?Jeu $Partie = null;
+    private ?Jeu $jeu = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $pseudo = null;
 
     public function getId(): ?int
     {
@@ -67,14 +70,26 @@ class Partie
         return $this;
     }
 
-    public function getPartie(): ?Jeu
+    public function getjeu(): ?Jeu
     {
-        return $this->Partie;
+        return $this->jeu;
     }
 
-    public function setPartie(?Jeu $Partie): static
+    public function setJeu(?Jeu $jeu): static
     {
-        $this->Partie = $Partie;
+        $this->jeu = $jeu;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): static
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
